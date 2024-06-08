@@ -1,10 +1,17 @@
-import { createClient } from "@liveblocks/client";
+import {
+   createClient ,
+   LiveList,
+   LiveMap,
+   LiveObject
+  } from "@liveblocks/client";
 import { createRoomContext, createLiveblocksContext } from "@liveblocks/react";
+
+import { Layer, Color } from "@/types/canvas";
   
 const client = createClient({
-   publicApiKey: "pk_dev_JpL_PFBVD-9Lm6r6vf2-QXCrsLdIEWcTIlVHy5QHfcjEUusRwT6QJln8z6VSnAcQ",
-  // authEndpoint: "/api/liveblocks-auth",
-  // throttle: 100,
+  // publicApiKey: "pk_dev_JpL_PFBVD-9Lm6r6vf2-QXCrsLdIEWcTIlVHy5QHfcjEUusRwT6QJln8z6VSnAcQ",
+   authEndpoint: "/api/liveblocks-auth",
+   throttle: 16,
   async resolveUsers({ userIds }) {
     // Used only for Comments and Notifications. Return a list of user information
     // retrieved from `userIds`. This info is used in comments, mentions etc.
@@ -51,8 +58,8 @@ const client = createClient({
 // and that will automatically be kept in sync. Accessible through the
 // `user.presence` property. Must be JSON-serializable.
 type Presence = {
-  // cursor: { x: number, y: number } | null,
-  // ...
+   cursor: { x: number, y: number } | null,
+   selection : string [],
 };
 
 // Optionally, Storage represents the shared document that persists in the
@@ -60,16 +67,19 @@ type Presence = {
 // LiveList, LiveMap, LiveObject instances, for which updates are
 // automatically persisted and synced to all connected clients.
 type Storage = {
-  // author: LiveObject<{ firstName: string, lastName: string }>,
-  // ...
+  layers : LiveMap<string , LiveObject<Layer>>;
+  layerIds : LiveList<string>
 };
 
 // Optionally, UserMeta represents static/readonly metadata on each user, as
 // provided by your own custom auth back end (if used). Useful for data that
 // will not change during a session, like a user's name or avatar.
 type UserMeta = {
-  // id?: string,  // Accessible through `user.id`
-  // info?: Json,  // Accessible through `user.info`
+   id?: string,  // Accessible through `user.id`
+   info?: {
+    name ?: string,
+    avatar  ?: string
+   },  // Accessible through `user.info`
 };
 
 // Optionally, the type of custom events broadcast and listened to in this
