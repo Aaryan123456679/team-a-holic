@@ -30,6 +30,8 @@ export const Room = ({
         <RoomProvider id={roomId} initialPresence={{
             cursor : null,
             selection : [],
+            pencilColor : null,
+            pencilDraft : null
         }}
         initialStorage={{
             layers : new LiveMap<string , LiveObject<Layer>>(),
