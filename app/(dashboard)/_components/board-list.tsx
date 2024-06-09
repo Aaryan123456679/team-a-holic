@@ -39,6 +39,7 @@ export const BoardList = ({
                 <BoardCard.Skeleton />
                 <BoardCard.Skeleton />
                 <BoardCard.Skeleton />
+                <BoardCard.Skeleton />
             </div>
         </div>
          )
@@ -71,15 +72,15 @@ export const BoardList = ({
             <NewBoardButton orgId = {orgId}/>
             {data?.map((board) => (
                 <BoardCard 
-                key = {board._id}
-                id = {board._id}
-                title = {board.title}
-                imageUrl = {board.imageUrl}
-                authorId = {board.authorID}
-                authorName = {board.authorName}
-                createdAt = {board._creationTime}
-                orgId = {board.orgId}
-                isFavorite = {board.isFavorite}
+                    key = {board._id}
+                    id = {board._id}
+                    title = {board.title}
+                    imageUrl = {board.imageUrl}
+                    authorId = {board.authorID}
+                    authorName = {board.authorName}
+                    createdAt = {board._creationTime}
+                    orgId = {board.orgId}
+                    isFavorite = {board.isFavorite}
                 />
             ))}
         </div>
