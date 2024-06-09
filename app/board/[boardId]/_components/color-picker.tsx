@@ -29,6 +29,7 @@ export const ColorPicker = ({
         className="flex flex-wrap gap-2 items-center max-w-[164px] pr-2 mr-2 border-r border-neutral-200"
         >
             {ColorsArray.map(({r ,g ,b}) => {return (<ColorButton 
+                key = {ColorsArray.indexOf({r,g,b})}
                 onClick={onChange}
                 color = {{
                     r : r,
