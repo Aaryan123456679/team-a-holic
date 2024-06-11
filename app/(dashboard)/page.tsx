@@ -3,17 +3,19 @@
 import { useOrganization } from "@clerk/nextjs";
 import { EmptyOrg } from "./_components/empty-org";
 import { BoardList } from "./_components/board-list";
-
-interface DashBoardProps {
-  searchParams : {
-    search? : string;
-    favorites ?: string;
-  };
-};
+import { useSearchParams } from "next/navigation";
 
 const DashBoard = ({
-  searchParams,
-}  : DashBoardProps) => {
+
+} ) => {
+
+  const searchParams = useSearchParams();
+  const favorites = searchParams.get('favorites') || undefined;
+  const search = searchParams.get('search') || undefined;
+  const query = {
+    search,
+    favorites
+  };
 
   const {organization} = useOrganization();
 
@@ -22,7 +24,7 @@ const DashBoard = ({
       {!organization?(<EmptyOrg />) : (
         <BoardList 
         orgId = {organization.id}
-        query = {searchParams}
+        query = {query}
         />
       )}
     </div>
